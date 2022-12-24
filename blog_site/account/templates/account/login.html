@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+
+<style type="text/css">
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(226, 224, 224, 0.693);
+  }
+
+  #login-form {
+    max-width: 500px;
+    width:100%;
+    margin: 100px auto;
+    background-color: #f2f2f2;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px 1px rgba(166, 163, 163, 0.3);
+  }
+  #login-form:hover {
+    box-shadow: 1px 1px 5px 1px rgb(255, 255, 255);
+  }
+
+  #login-form h1 {
+    margin: 0 0 30px 0;
+    padding: 0;
+    text-align: center;
+    font-size: 30px;
+    font-family: "cheap pine";
+    color: rgb(0, 0, 0);
+  }
+
+  #login-form input[type="text"],
+  #login-form input[type="password"] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  #login-form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  #login-form input[type="submit"]:hover {
+    background-color: rgb(3, 3, 3);
+  }
+
+
+</style>
+
+<form id="login-form" method="post">
+  {% csrf_token %}
+  <h1>Login</h1>
+
+  <input type="text" name="email" placeholder="Email" />
+  <input type="password" name="password" placeholder="Password" />
+  {% for field in login_form %} {%for error in field.errors %}
+  <p style="color: rgba(202, 0, 94, 0.826); font-size: 20px">{{error}}</p>
+  {% endfor %} {% endfor %} {% if login_form.non_field_errors %}
+  <p style="color: rgba(202, 0, 94, 0.826)">{{login_form.non_field_errors}}</p>
+  {% endif %}
+
+  <input type="submit" value="Sign In" />
+  <div class="d-flex flex-column" style="margin-top: 20px;">
+    <a class="m-auto" href="{% url 'password_reset' %}"><p style="color: rgb(0, 90, 154);" >Forgot Password</p></a>
+  </div>
+</form>
+
+
+{% endblock content %}

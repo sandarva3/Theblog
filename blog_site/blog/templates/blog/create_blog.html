@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+
+<style type="text/css">
+  .create-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: auto;
+  }
+
+  button {
+    padding: 0.5em 1em;
+    border:none;
+    border-radius: 10px;
+    background-color: rgb(0, 0, 214);
+    color: white;
+    cursor: pointer;
+  }
+  button:hover{
+    background-color: rgb(0, 0, 255);
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-7 offset-lg-1">
+      <form class="create-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if success_message %}
+				    <h3 style="color:green; text-align: center;">{{success_message}}</h3>    
+        {% endif %}
+			  {% if request.POST and error_message %}
+            <h3 style="color:red; text-align: center;">{{error_message}}</h3>
+            <p style="color: red; text-align: center;">please select only image file.(jpeg,jpg,png)would be appropriate </p>
+        {% endif %}
+
+        <!-- title -->
+        <div class="form-group">
+          <label for="id_title">Title</label>
+          <input
+            class="form-control"
+            type="text"
+            name="title"
+            id="id_title"
+            placeholder="Title"
+            required
+            autofocus
+            maxlength="75"
+          />
+        </div>
+        <!-- Body -->
+        <div class="form-group">
+          <label for="id_body">Content</label>
+          <textarea
+            class="form-control"
+            rows="10"
+            type="text"
+            name="body"
+            id="id_body"
+            placeholder="Write a blog here..."
+            required
+            maxlength="6500"
+          ></textarea>
+        </div>
+
+        <!-- Image -->
+        <div class="form-group">
+            <label for="id_image">Choose an image:</label><br>
+            <input style="margin-top: 10px;" type="file" id="id_image" accept="image/jpeg,image/png,image/jpg" name="image" required><br>
+        </div>
+
+        <!-- Submit btn -->
+        <button type="submit" style="margin-top: 15px;" >Post</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

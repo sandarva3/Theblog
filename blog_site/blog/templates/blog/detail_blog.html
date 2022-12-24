@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .card {
+    max-width: 700px;
+  }
+  .container {
+    padding: 20px;
+  }
+  .edit{
+    margin-top: 10px;
+    background-color:green;
+  }
+  .edit:hover{
+    background-color: rgb(0, 162, 0);
+  }
+  .delete{
+    background-color:rgb(234, 1, 1);
+    margin-top: 15px;
+  }
+  .delete:hover{
+    background-color:rgb(205, 0, 0);
+  }
+  .delete-div{
+    display: inline;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <!-- BLOG_POST -->
+
+    <div class="card m-auto">
+      <img class="card-img-top" src="{{blog_post.image.url}}">
+      <div class="card-body my-2">
+        <h2 class="card-title">{{blog_post.title}}</h2>
+        <p class="card-text">{{blog_post.body|safe}}</p>
+        {% if blog_post.author == request.user %}
+        <a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary edit">Edit blog</a>
+        <div class="delete-div">
+          <form action="{% url 'blog:delete' blog_post.slug %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary delete">Delete blog</button>
+          </form>
+        </div>
+        
+        {% endif %}
+      </div>
+      <div class="card-footer text-muted">
+        Posted on {{blog_post.date_update}} by {{blog_post.author}}.
+      </div>
+    </div>
+
+    <!-- END_BLOG_POST -->
+  </div>
+</div>
+
+{% endblock content %}

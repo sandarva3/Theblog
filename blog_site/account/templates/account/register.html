@@ -1,0 +1,142 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(
+      to right,
+      rgba(132, 250, 176, 0.5),
+      rgba(143, 211, 244, 0.5)
+    );
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(
+      to right,
+      rgba(132, 250, 176, 0.5),
+      rgba(143, 211, 244, 0.5)
+    );
+  }
+  .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(
+      to right,
+      rgba(132, 250, 176, 1),
+      rgba(143, 211, 244, 1)
+    );
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(
+      to right,
+      rgba(132, 250, 176, 1),
+      rgba(143, 211, 244, 1)
+    );
+  }
+</style>
+<section>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="card" style="border-radius: 15px">
+          <div class="card-body p-5">
+            <h2 class="text-uppercase text-center mb-5 text-decoration-underline-dotted" style="border-bottom: 1px solid black;">Create an account</h2>
+
+            <form method="post">
+              {% csrf_token %}
+
+              <div class="form-outline mb-4">
+                <input
+                  type="text"
+                  id="form3Example1cg"
+                  class="form-control form-control-lg"
+                  name="username" 
+                  required
+                  autofocus
+                />
+                <label class="form-label" for="form3Example1cg"
+                  >Your Username</label
+                >
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="email"
+                  id="form3Example3cg"
+                  class="form-control form-control-lg"
+                  name="email"
+                  required
+                />
+                <label class="form-label" for="form3Example3cg"
+                  >Your Email</label
+                >
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  id="form3Example4cg"
+                  class="form-control form-control-lg"
+                  name="password1"
+                  required
+                />
+                <label class="form-label" for="form3Example4cg">Password</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  id="form3Example4cdg"
+                  class="form-control form-control-lg"
+                  name="password2"
+                  required
+                />
+                <label class="form-label" for="form3Example4cdg"
+                  >Confirm your password</label
+                >
+              </div>
+              {% for field in Registrationform %}
+  <p>
+      {% for error in field.errors %}
+      <p style="color:red;">
+          {{error}}
+      </p>
+      {% endfor %}
+  </p>
+  {% endfor %}
+    
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+{% comment %} <form method="post">
+  {% csrf_token %}
+  {% for field in Registrationform %}
+  <p>
+      {% for error in field.errors %}
+      <p style="color:red;">
+          {{error}}
+      </p>
+      {% endfor %}
+  </p>
+  {% endfor %}
+  <button type = "submit"> Register </button>
+</form> {% endcomment %}
