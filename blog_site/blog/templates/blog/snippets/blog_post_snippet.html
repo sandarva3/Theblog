@@ -32,7 +32,7 @@
 				{% if blog_post.date_update == blog_post.date_published %}
 				   Published: {{blog_post.date_update}} by {{blog_post.author.username}}.<br/>
 				   Last modified: Hasn't been edited since published.
-				{% else %}
+				{% elif blog_post.date_update != blog_post.date_published %}
 				   Published: {{blog_post.date_update}} by {{blog_post.author.username}}.<br/>
 			       Last modified: {{blog_post.date_published}}.
 				{% endif %}

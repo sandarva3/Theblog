@@ -6,7 +6,7 @@ from blog.views import get_blog_queryset
 
 
 # Create your views here:
-blog_post_per_page = 10
+blog_post_per_page = 5
 def home_screen(request):
     context = {}
     query = ""

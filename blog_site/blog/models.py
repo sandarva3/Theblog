@@ -40,4 +40,3 @@ pre_save.connect(pre_save_blog_post_receiver, sender = Blogpost)
     
 
 
-
